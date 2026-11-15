@@ -2,6 +2,15 @@ import type { CSSProperties, ElementType, ReactNode } from 'react';
 import { TECH, type TechKey } from '../tech';
 import { useReveal } from '../hooks';
 
+/** Brooke-style section label: "— MY BACKGROUND" */
+export function Label({ children, id }: { children: ReactNode; id?: string }) {
+  return (
+    <p className="label" id={id}>
+      <span aria-hidden="true">—</span> {children}
+    </p>
+  );
+}
+
 /** Fades and lifts its content in when scrolled into view. */
 export function Reveal({
   as: Tag = 'div',

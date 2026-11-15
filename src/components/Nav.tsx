@@ -4,10 +4,10 @@ import { profile } from '../data';
 import type { Theme } from '../hooks';
 
 const LINKS = [
-  ['about', 'About'],
+  ['about', 'About me'],
+  ['skills', 'Tech stack'],
   ['experience', 'Experience'],
   ['projects', 'Projects'],
-  ['skills', 'Skills'],
   ['contact', 'Contact'],
 ] as const;
 
@@ -51,7 +51,8 @@ export default function Nav({ theme, onToggleTheme }: { theme: Theme; onToggleTh
     <header className={`nav${scrolled ? ' scrolled' : ''}${open ? ' open' : ''}`}>
       <div className="wrap nav-inner">
         <a href="#top" className="logo" aria-label={`${profile.name}, back to top`}>
-          {profile.name}
+          {profile.firstName.toUpperCase()}
+          <span className="logo-dot" aria-hidden="true" />
         </a>
 
         <nav id="site-menu" aria-label="Sections" className="nav-menu">
@@ -74,7 +75,11 @@ export default function Nav({ theme, onToggleTheme }: { theme: Theme; onToggleTh
             aria-label={`Switch to ${next} theme`}
             title={`Switch to ${next} theme`}
           >
-            {theme === 'dark' ? <TbSun aria-hidden="true" /> : <TbMoon aria-hidden="true" />}
+            <span className={`toggle-track ${theme}`} aria-hidden="true">
+              <TbSun className="toggle-sun" />
+              <TbMoon className="toggle-moon" />
+              <span className="toggle-thumb" />
+            </span>
           </button>
           <button
             type="button"

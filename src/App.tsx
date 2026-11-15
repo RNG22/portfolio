@@ -1,5 +1,5 @@
 import Nav from './components/Nav';
-import { About, Contact, Education, Experience, Footer, Hero, Projects, Stack } from './components/Sections';
+import { About, Contact, Education, Experience, Footer, Hero, Impact, Projects, Stack } from './components/Sections';
 import { useTheme } from './hooks';
 
 export default function App() {
@@ -11,9 +11,10 @@ export default function App() {
       <main id="main">
         <Hero />
         <About />
+        <Impact />
+        <Stack />
         <Experience />
         <Projects />
-        <Stack />
         <Education />
         <Contact />
       </main>

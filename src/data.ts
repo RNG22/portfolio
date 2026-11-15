@@ -16,7 +16,7 @@ export const profile = {
   linkedin: '',
   photo: 'rutuja-gaikwad.jpg',
   intro:
-    'Frontend-focused, with 4 years of React, Angular and TypeScript across aviation, data and e-learning products. Currently working on the Skyhop booking platform and the Precog data platform at SpiceJet.',
+    'I build fast, dependable web interfaces with React, Angular and TypeScript, from booking flows that thousands of travellers use to data platforms that teams rely on every day.',
   background: [
     'I’m a frontend-focused software developer with 4 years of experience. Today I work at SpiceJet on the Skyhop booking platform and the Precog data platform, where I design reusable UI systems, tune performance, and build secure, API-driven screens.',
     'I care about interfaces that feel instant and never surprise the people using them: clear validation, sensible defaults, and components that other developers can pick up and trust.',

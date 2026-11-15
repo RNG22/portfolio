@@ -23,7 +23,7 @@ export function useTheme() {
     root.dataset.theme = theme;
     root.style.colorScheme = theme;
     const meta = document.querySelector('meta[name="theme-color"]');
-    meta?.setAttribute('content', theme === 'dark' ? '#0a0a0b' : '#ffffff');
+    meta?.setAttribute('content', theme === 'dark' ? '#0c0f1d' : '#f3f5fb');
   }, [theme]);
 
   const toggle = useCallback(() => {
@@ -68,4 +68,44 @@ export function useReveal<T extends HTMLElement>() {
   }, []);
 
   return { ref, className: shown ? 'reveal in' : 'reveal' };
+}
+
+/**
+ * Counts up to `target` when scrolled into view. Starts at the final value, so anything
+ * that renders without scrolling (link previews, printing, reduced motion) shows real numbers.
+ */
+export function useCountUp<T extends HTMLElement>(target: number, duration = 1200) {
+  const ref = useRef<T>(null);
+  const [value, setValue] = useState(target);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || prefersReducedMotion() || !('IntersectionObserver' in window)) return;
+    if (el.getBoundingClientRect().top < window.innerHeight) return; // already visible: no animation
+
+    let frame = 0;
+    setValue(0);
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        io.disconnect();
+        const start = performance.now();
+        const tick = (now: number) => {
+          const p = Math.min(1, (now - start) / duration);
+          setValue(Math.round(target * (1 - Math.pow(1 - p, 3))));
+          if (p < 1) frame = requestAnimationFrame(tick);
+        };
+        frame = requestAnimationFrame(tick);
+      },
+      { threshold: 0.5 },
+    );
+    io.observe(el);
+    return () => {
+      io.disconnect();
+      cancelAnimationFrame(frame);
+      setValue(target);
+    };
+  }, [target, duration]);
+
+  return { ref, value };
 }
