@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { TbArrowUpRight, TbChevronLeft, TbChevronRight } from 'react-icons/tb';
-import { TECH, type TechKey } from '../tech';
 
 const reducedMotion = () => window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
 const asset = (p: string) => `${import.meta.env.BASE_URL}${p}`;
@@ -118,31 +117,6 @@ export function ProjectCarousel({
       <p className="sr-only" aria-live="polite">
         {images[index].alt}
       </p>
-    </div>
-  );
-}
-
-/** Endless, gently scrolling strip of brand logos. Pauses on hover; static with reduced motion. */
-export function LogoMarquee({ items }: { items: TechKey[] }) {
-  const row = (hidden: boolean) => (
-    <ul className="marquee-row" aria-hidden={hidden || undefined}>
-      {items.map((k) => {
-        const { name, Icon, color } = TECH[k];
-        return (
-          <li key={k} style={color ? { color } : undefined}>
-            <Icon aria-hidden="true" />
-            <span>{name}</span>
-          </li>
-        );
-      })}
-    </ul>
-  );
-  return (
-    <div className="marquee" aria-label="Technologies I work with">
-      <div className="marquee-inner">
-        {row(false)}
-        {row(true)}
-      </div>
     </div>
   );
 }
