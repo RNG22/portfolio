@@ -31,9 +31,16 @@ export const highlights = [
 ];
 
 export const stack: { title: string; items: TechKey[] }[] = [
-  { title: 'Languages', items: ['typescript', 'javascript', 'html', 'css'] },
-  { title: 'Frameworks & libraries', items: ['react', 'angular', 'redux', 'next', 'node', 'mui', 'tailwind'] },
-  { title: 'APIs & data', items: ['rest', 'websockets', 'jwt', 'mongodb', 'sql'] },
+  { title: 'Languages', items: ['typescript', 'javascript', 'java', 'html', 'css'] },
+  {
+    title: 'Frameworks & libraries',
+    items: [
+      'react', 'angular', 'redux', 'next', 'node', 'nest',
+      // 'springboot', // Spring Boot: uncomment to show it on the site
+      'mui', 'tailwind',
+    ],
+  },
+  { title: 'APIs & data', items: ['rest', 'websockets', 'jwt', 'postgres', 'redis', 'mongodb', 'sql'] },
   { title: 'Delivery & tools', items: ['git', 'jenkins', 'aws', 'postman'] },
 ];
 
@@ -101,6 +108,11 @@ export type Project = {
   points?: string[];
   tech: TechKey[];
   gradient: [string, string];
+  /** Screenshots shown in a carousel (files in public/projects/). Without images, a logo card is shown. */
+  images?: { src: string; alt: string }[];
+  /** Deployed URL. When set, clicking the screenshots opens it in a new tab. */
+  live?: string;
+  /** Source code URL. */
   link?: string;
 };
 
@@ -117,6 +129,12 @@ export const projects: Project[] = [
     ],
     tech: ['next', 'nest', 'typescript', 'postgres', 'redis', 'docker'],
     gradient: ['#0ea5e9', '#6366f1'],
+    images: [
+      { src: 'projects/seaplane-home.jpg', alt: 'Seaplane booking site home page with flight search' },
+      { src: 'projects/seaplane-search.jpg', alt: 'Flight results showing seats and remaining weight allowance' },
+      { src: 'projects/seaplane-console.jpg', alt: 'Dispatcher console with manifest, check-in and weight and balance' },
+    ],
+    live: '', // add the deployed URL here
   },
   {
     title: 'Real-time chat app',
@@ -125,6 +143,7 @@ export const projects: Project[] = [
       'A full-stack chat application with JWT authentication and two-way WebSocket messaging, backed by Node.js, Express and MongoDB.',
     tech: ['react', 'websockets', 'express', 'mongodb', 'jwt'],
     gradient: ['#10b981', '#06b6d4'],
+    live: '', // add the deployed URL here (and screenshots in `images`)
   },
   {
     title: 'E-commerce app',
@@ -133,6 +152,7 @@ export const projects: Project[] = [
       'A responsive store built with Angular and RxJS: product listing with pagination, cart management and a complete checkout flow over REST APIs.',
     tech: ['angular', 'rxjs', 'rest', 'postman'],
     gradient: ['#f43f5e', '#f59e0b'],
+    live: '', // add the deployed URL here (and screenshots in `images`)
   },
 ];
 

@@ -1,5 +1,5 @@
 import Nav from './components/Nav';
-import { About, Contact, Education, Experience, Footer, Hero, Impact, Projects, Stack } from './components/Sections';
+import { About, Contact, Education, Experience, Footer, Hero, Impact, Projects, Stack, TechStrip } from './components/Sections';
 import { useTheme } from './hooks';
 
 export default function App() {
@@ -10,6 +10,7 @@ export default function App() {
       <Nav theme={theme} onToggleTheme={toggle} />
       <main id="main">
         <Hero />
+        <TechStrip />
         <About />
         <Impact />
         <Stack />

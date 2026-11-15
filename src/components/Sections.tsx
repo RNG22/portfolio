@@ -3,6 +3,7 @@ import { SiGithub } from 'react-icons/si';
 import { TbArrowRight, TbArrowUpRight, TbBriefcase, TbCheck, TbCopy, TbMail, TbMapPin, TbSchool } from 'react-icons/tb';
 import { education, experience, highlights, profile, projects, stack } from '../data';
 import { useCountUp } from '../hooks';
+import { LogoMarquee, ProjectCarousel } from './Carousel';
 import { Label, Reveal, Rich, TechChip, TechList } from './ui';
 
 const asset = (p: string) => `${import.meta.env.BASE_URL}${p}`;
@@ -54,11 +55,6 @@ export function Hero() {
           <div className="photo-frame">
             <img src={asset(profile.photo)} width={640} height={640} alt={`Portrait of ${profile.name}`} fetchPriority="high" />
           </div>
-          <ul className="floating" aria-hidden="true">
-            <TechChip id="react" />
-            <TechChip id="angular" />
-            <TechChip id="typescript" />
-          </ul>
           <div className="now-card">
             <span className="now-dot" aria-hidden="true" />
             <div>
@@ -68,6 +64,16 @@ export function Hero() {
           </div>
         </Reveal>
       </div>
+    </section>
+  );
+}
+
+/* ------------------------------------------------------------- Logo strip */
+export function TechStrip() {
+  const all = [...new Set(stack.flatMap((g) => g.items))];
+  return (
+    <section className="tech-strip" aria-label="Technologies">
+      <LogoMarquee items={all} />
     </section>
   );
 }
@@ -188,6 +194,27 @@ export function Experience() {
 }
 
 /* ------------------------------------------------------------- Projects */
+/** Gradient card with the project's main logos, used until screenshots are added. Clickable when live. */
+function ProjectArt({ project: p }: { project: (typeof projects)[number] }) {
+  const logos = (
+    <ul className="art-logos" aria-hidden="true">
+      {p.tech.slice(0, 3).map((k) => (
+        <TechChip key={k} id={k} />
+      ))}
+    </ul>
+  );
+  return p.live ? (
+    <a className="project-art" href={p.live} target="_blank" rel="noopener noreferrer" aria-label={`Open ${p.title} (live site)`}>
+      {logos}
+      <span className="live-badge">
+        View live <TbArrowUpRight aria-hidden="true" />
+      </span>
+    </a>
+  ) : (
+    <div className="project-art" aria-hidden="true">{logos}</div>
+  );
+}
+
 export function Projects() {
   return (
     <section className="section projects" id="projects" aria-labelledby="projects-title">
@@ -205,13 +232,13 @@ export function Projects() {
               delay={i * 70}
               style={{ ['--g1' as string]: p.gradient[0], ['--g2' as string]: p.gradient[1] }}
             >
-              <div className="project-art" aria-hidden="true">
-                <ul className="art-logos">
-                  {p.tech.slice(0, 3).map((k) => (
-                    <TechChip key={k} id={k} />
-                  ))}
-                </ul>
-              </div>
+              {p.images?.length ? (
+                <div className="project-media">
+                  <ProjectCarousel images={p.images} title={p.title} live={p.live || undefined} />
+                </div>
+              ) : (
+                <ProjectArt project={p} />
+              )}
               <div className="project-body">
                 <p className="project-tag">{p.tag}</p>
                 <h3>{p.title}</h3>
@@ -226,10 +253,19 @@ export function Projects() {
                   </ul>
                 )}
                 <TechList items={p.tech} size="sm" />
-                {p.link && (
-                  <a className="project-link" href={p.link} target="_blank" rel="noopener noreferrer">
-                    View code <TbArrowUpRight aria-hidden="true" />
-                  </a>
+                {(p.live || p.link) && (
+                  <div className="project-links">
+                    {p.live && (
+                      <a className="project-link" href={p.live} target="_blank" rel="noopener noreferrer">
+                        Live demo <TbArrowUpRight aria-hidden="true" />
+                      </a>
+                    )}
+                    {p.link && (
+                      <a className="project-link" href={p.link} target="_blank" rel="noopener noreferrer">
+                        View code <TbArrowUpRight aria-hidden="true" />
+                      </a>
+                    )}
+                  </div>
                 )}
               </div>
             </Reveal>
@@ -336,7 +372,6 @@ export function Contact() {
           <button className="btn btn-primary" type="submit">
             Send message <TbArrowRight aria-hidden="true" />
           </button>
-          <p className="form-note">Opens your email app with the message ready to send.</p>
         </Reveal>
       </div>
     </section>

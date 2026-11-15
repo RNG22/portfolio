@@ -4,11 +4,11 @@
  * follows the text colour and stays visible in dark mode.
  */
 import type { IconType } from 'react-icons';
-import { FaAws } from 'react-icons/fa';
+import { FaAws, FaJava } from 'react-icons/fa';
 import {
   SiAngular, SiChartdotjs, SiCss, SiDocker, SiExpress, SiGit, SiHtml5, SiJavascript, SiJenkins,
   SiJsonwebtokens, SiMongodb, SiMui, SiNestjs, SiNextdotjs, SiNodedotjs, SiPostgresql, SiPostman,
-  SiReact, SiReactivex, SiRedis, SiRedux, SiTailwindcss, SiTypescript,
+  SiReact, SiReactivex, SiRedis, SiRedux, SiSpringboot, SiTailwindcss, SiTypescript,
 } from 'react-icons/si';
 import { TbDatabase, TbPlugConnected } from 'react-icons/tb';
 
@@ -21,6 +21,7 @@ export const TECH = {
   angular: t('Angular', SiAngular, '#dd0031'),
   typescript: t('TypeScript', SiTypescript, '#3178c6'),
   javascript: t('JavaScript', SiJavascript, '#e8b500'),
+  java: t('Java', FaJava, '#f89820'),
   html: t('HTML5', SiHtml5, '#e34f26'),
   css: t('CSS', SiCss, '#663399'),
   redux: t('Redux Toolkit', SiRedux, '#764abc'),
@@ -42,6 +43,7 @@ export const TECH = {
   rxjs: t('RxJS', SiReactivex, '#b7178c'),
   chartjs: t('Chart.js', SiChartdotjs, '#ff6384'),
   nest: t('NestJS', SiNestjs, '#e0234e'),
+  springboot: t('Spring Boot', SiSpringboot, '#6db33f'),
   postgres: t('PostgreSQL', SiPostgresql, '#4169e1'),
   redis: t('Redis', SiRedis, '#ff4438'),
   docker: t('Docker', SiDocker, '#2496ed'),
