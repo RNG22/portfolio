@@ -1,26 +1,26 @@
 # Rutuja Gaikwad — Portfolio
 
-Personal portfolio site: experience, projects and skills of a software developer with 4 years in React, Angular and TypeScript.
+Personal portfolio of a software developer with 4 years in React, Angular and TypeScript.
 
 **Live:** https://rng22.github.io/portfolio/
 
 ## Stack
 
-Plain HTML, CSS and a little JavaScript. No build step, no dependencies. Hosted on GitHub Pages.
+React 19 + TypeScript, built with Vite. Tech logos from [react-icons](https://react-icons.github.io/react-icons/) (Simple Icons) in their brand colours. Deployed to GitHub Pages by GitHub Actions on every push to `main`.
 
-- Light and dark themes (follows the system, with a toggle that remembers your choice)
-- Responsive down to small phones, keyboard accessible, respects reduced-motion
+- Light theme by default, with a sun/moon toggle for dark mode (your choice is remembered)
+- Responsive, keyboard accessible, respects reduced-motion
 - SEO and social previews (Open Graph, JSON-LD `Person`)
 
-## Edit
+## Edit content
 
-All content is in `index.html`; styles in `styles.css`; behaviour in `main.js`.
+Everything you see comes from **`src/data.ts`**: profile, experience, projects, skills, education.
+Tech logos and colours are in `src/tech.tsx`. To show LinkedIn, set `profile.linkedin` in `src/data.ts`.
 
-Preview locally:
+## Run locally
 
 ```bash
-python3 -m http.server 8000
-# open http://localhost:8000
+npm install
+npm run dev        # http://localhost:5173/portfolio/
+npm run build      # production build in dist/
 ```
-
-Push to `main` and GitHub Pages redeploys automatically.
